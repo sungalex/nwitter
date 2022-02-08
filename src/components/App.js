@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AppRouter from "components/Router";
-import { authService } from "firebaseService";
+import { authService } from "fbService";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
