@@ -10,7 +10,7 @@ import React, { useState } from "react";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
 
   const onChange = (event) => {
     const {
@@ -42,6 +42,7 @@ const Auth = () => {
       console.log(error);
     }
   };
+  const toggleAccount = () => setNewAccount((prev) => !prev);
 
   return (
     <div>
@@ -62,7 +63,9 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="Log In" />
+        <span onClick={toggleAccount}>
+          <input type="submit" value="Log In" />
+        </span>
       </form>
       <div>
         <button>Continue with Google</button>
