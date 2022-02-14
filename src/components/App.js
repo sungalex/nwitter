@@ -16,7 +16,9 @@ function App() {
     });
   }, []);
   return (
-    <>{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}</>
+    <>
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : <h1>Initializing...</h1>}
+    </>
   );
 }
 
