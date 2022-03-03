@@ -6,7 +6,7 @@ import {
   serverTimestamp,
   onSnapshot,
 } from "firebase/firestore";
-import { ref, uploadString } from "firebase/storage";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,22 +17,24 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    let imageFullPath;
+    let attachmentUrl = "";
     if (attachment) {
-      const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-      const response = await uploadString(fileRef, attachment, "data_url");
-      console.log(response);
-      imageFullPath = response.ref.fullPath;
-    } else {
-      imageFullPath = "";
+      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const response = await uploadString(
+        attachmentRef,
+        attachment,
+        "data_url"
+      );
+      attachmentUrl = await getDownloadURL(response.ref);
     }
-    await addDoc(collection(dbService, "nweets"), {
+    const nweetObj = {
       text: nweet,
       createdAt: serverTimestamp(),
       creatorId: userObj.uid,
       creatorName: userObj.displayName,
-      imageUrl: imageFullPath,
-    });
+      attachmentUrl,
+    };
+    await addDoc(collection(dbService, "nweets"), nweetObj);
     setNweet("");
     setAttachment(null);
   };
@@ -94,11 +96,11 @@ const Home = ({ userObj }) => {
         )}
       </form>
       <div>
-        {nweets.map((nweet) => (
+        {nweets.map((nweetObj) => (
           <Nweet
-            key={nweet.id}
-            nweetObj={nweet}
-            isOwner={nweet.creatorId === userObj.uid}
+            key={nweetObj.id}
+            nweetObj={nweetObj}
+            isOwner={nweetObj.creatorId === userObj.uid}
           />
         ))}
       </div>
