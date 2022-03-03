@@ -55,7 +55,7 @@ const Home = ({ userObj }) => {
       }));
       setNweets(nweetArray);
     });
-  }, [attachment]);
+  }, [attachment, nweets]);
 
   const onFileChange = (event) => {
     const {
