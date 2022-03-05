@@ -48,7 +48,7 @@ const Profile = ({ setUserName, userObj }) => {
       await updateProfile(userObj, {
         displayName: newDisplayName,
       });
-      setUserName(authService.currentUser.displayName);
+      setUserName(userObj.displayName);
     }
   };
 
