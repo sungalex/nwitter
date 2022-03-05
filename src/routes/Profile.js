@@ -4,7 +4,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Profile = ({ userObj }) => {
+const Profile = ({ setUserName, userObj }) => {
   const [nweets, setNweets] = useState([]);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -48,6 +48,7 @@ const Profile = ({ userObj }) => {
       await updateProfile(userObj, {
         displayName: newDisplayName,
       });
+      setUserName(authService.currentUser.displayName);
     }
   };
 

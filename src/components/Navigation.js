@@ -2,7 +2,7 @@ import { updateProfile } from "firebase/auth";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navigation = ({ userObj }) => {
+const Navigation = ({ userName, userObj }) => {
   if (userObj.displayName === "") {
     const name = userObj.email.split("@")[0];
     updateProfile(userObj, {
@@ -16,7 +16,7 @@ const Navigation = ({ userObj }) => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/profile">{userObj.displayName}'s Profile</Link>
+          <Link to="/profile">{userName}'s Profile</Link>
         </li>
       </ul>
     </nav>
