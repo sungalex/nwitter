@@ -8,7 +8,7 @@ import Navigation from "components/Navigation";
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       {isLoggedIn ? (
         <Routes>
           <Route exact path="/" element={<Home userObj={userObj} />} />
