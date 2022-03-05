@@ -48,14 +48,21 @@ const Home = ({ userObj }) => {
 
   useEffect(() => {
     // a listener for DocumentSnapshot events
-    onSnapshot(collection(dbService, "nweets"), (snapshot) => {
-      const nweetArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setNweets(nweetArray);
-    });
-  }, [attachment, nweets]);
+    const unsubscribe = onSnapshot(
+      collection(dbService, "nweets"),
+      (snapshot) => {
+        const nweetArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setNweets(nweetArray);
+      }
+    );
+    // removes the listener
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const onFileChange = (event) => {
     const {
