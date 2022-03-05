@@ -1,14 +1,9 @@
-import { updateProfile } from "firebase/auth";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ userName, userObj }) => {
-  if (userObj.displayName === "") {
-    const name = userObj.email.split("@")[0];
-    updateProfile(userObj, {
-      displayName: name,
-    });
-  }
+  console.log(userObj);
+
   return (
     <nav>
       <ul>

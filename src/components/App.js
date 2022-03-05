@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbService";
+import { updateProfile } from "firebase/auth";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -9,10 +10,16 @@ function App() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    authService.onAuthStateChanged((user) => {
+    authService.onAuthStateChanged(async (user) => {
       if (user) {
         setIsLoggedIn(true);
         setUserObj(user);
+        if (user.displayName === null || user.displayName === "") {
+          const name = user.email.split("@")[0];
+          await updateProfile(user, {
+            displayName: name,
+          });
+        }
         setUserName(user.displayName);
       } else {
         setIsLoggedIn(false);
