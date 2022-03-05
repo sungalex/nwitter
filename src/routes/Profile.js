@@ -64,6 +64,11 @@ const Profile = ({ userObj }) => {
         <input type="submit" value="Update Profile" />
       </form>
       <button onClick={onLogoutClick}>Log Out</button>
+      <div>
+        {nweets.map((doc) => (
+          <div key={doc.id}>{doc.text}</div>
+        ))}
+      </div>
     </>
   );
 };
