@@ -14,6 +14,7 @@ const Navigation = ({ userName, userObj }) => {
           display: "flex",
           justifyContent: "center",
           marginTop: 50,
+          marginBottom: 20,
         }}>
         <li>
           <Link
