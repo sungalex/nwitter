@@ -1,3 +1,4 @@
+import Nweet from "components/Nweet";
 import { authService, dbService } from "fbService";
 import { updateProfile } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -53,24 +54,32 @@ const Profile = ({ setUserName, userObj }) => {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
         <input
           type="text"
           placeholder="Display Name"
           onChange={onChange}
           value={newDisplayName}
           required
+          className="formInput"
         />
-        <input type="submit" value="Update Profile" />
+        <input
+          type="submit"
+          value="Update Profile"
+          className="formBtn"
+          style={{ marginTop: 10 }}
+        />
       </form>
-      <button onClick={onLogoutClick}>Log Out</button>
-      <div>
-        {nweets.map((doc) => (
-          <div key={doc.id}>{doc.text}</div>
+      <span onClick={onLogoutClick} className="formBtn cancelBtn logOut">
+        Log Out
+      </span>
+      <div style={{ marginTop: 30 }}>
+        {nweets.map((nweetObj) => (
+          <Nweet key={nweetObj.id} nweetObj={nweetObj} isOwner={false} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
