@@ -53,9 +53,12 @@ form {
 
 .container {
   width: 100%;
-  max-width: 320px;
   display: flex;
   flex-direction: column;
+}
+
+.loginForm {
+  max-width: 320px;
 }
 
 .formInput {
