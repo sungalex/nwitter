@@ -254,7 +254,7 @@ form {
 }
 
 .nweet {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   background-color: white;
   width: 100%;
   padding: 20px;
@@ -271,7 +271,7 @@ form {
 
 .nweet img {
   right: -5px;
-  top: 15px;
+  top: 20px;
   position: absolute;
   border-radius: 50%;
   width: 50px;
