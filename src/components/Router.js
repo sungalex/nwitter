@@ -10,14 +10,16 @@ const AppRouter = ({ userName, setUserName, isLoggedIn, userObj }) => {
     <Router>
       {isLoggedIn && <Navigation userName={userName} userObj={userObj} />}
       {isLoggedIn ? (
-        <Routes>
-          <Route exact path="/" element={<Home userObj={userObj} />} />
-          <Route
-            exact
-            path="/profile"
-            element={<Profile setUserName={setUserName} userObj={userObj} />}
-          />
-        </Routes>
+        <div className="routerContainer">
+          <Routes>
+            <Route exact path="/" element={<Home userObj={userObj} />} />
+            <Route
+              exact
+              path="/profile"
+              element={<Profile setUserName={setUserName} userObj={userObj} />}
+            />
+          </Routes>
+        </div>
       ) : (
         <Routes>
           <Route path="*" element={<Auth />} />
